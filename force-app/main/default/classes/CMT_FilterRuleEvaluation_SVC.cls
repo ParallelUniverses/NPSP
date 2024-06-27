@@ -80,7 +80,7 @@ public class CMT_FilterRuleEvaluation_SVC {
         // Build a unique key of a concatenation of the Id's of all the detail rows.
         String cacheKey = filterGroupId + '.';
         for (SObject record : detailRows) {
-            String recordId = (record.Id == null ? (nullIdRowCounter++).format() : record.Id);
+            String recordId = (record?.Id.Id);
             cacheKey += recordId;
         }
         // If this set of detail rows has already been evaluated for this filter group, return the cached result
@@ -101,7 +101,7 @@ public class CMT_FilterRuleEvaluation_SVC {
         List<CMT_FilterRule> rulesToEvaluate = mapOfFilterRulesByGroupId.get(filterGroupId);
 
         for (SObject record : detailRows) {
-            String recordId = (record.Id == null ? (nullIdRowCounter++).format() : record.Id);
+            String recordId = (record?.Id.Id);
             SObjectType objType = record.getSObjectType();
             for (CMT_FilterRule rule : rulesToEvaluate) {
                 if (objType == rule.getObjectType()) {

@@ -193,9 +193,7 @@ public without sharing class RD2_CommitmentService {
     }
 
     private Id getRecordId(npe03__Recurring_Donation__c rd) {
-        Id recordId = rd.Id != null
-            ? rd.Id
-            : rd.npe03__Contact__c != null
+        Id recordId = rd?.Id.Id
                 ? rd.npe03__Contact__c
                 : rd.npe03__Organization__c;
         return recordId;

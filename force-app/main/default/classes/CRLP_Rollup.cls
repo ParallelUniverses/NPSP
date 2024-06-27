@@ -492,8 +492,7 @@ public class CRLP_Rollup {
 
         public Rollupmdt(Rollup__mdt rlp) {
             operation = rlp.Operation__c;
-            timeBoundOperationType = (rlp.Time_Bound_Operation_Type__c != null ? rlp.Time_Bound_Operation_Type__c :
-                    CRLP_Operation.TimeBoundOperationType.All_Time.name());
+            timeBoundOperationType = (rlp?.Time_Bound_Operation_Type__c.Time_Bound_Operation_Type__c);
             summaryObject = rlp.Summary_Object__r.QualifiedApiName;
             summaryField = rlp.Summary_Field__r.QualifiedApiName;
             detailObject = rlp.Detail_Object__r.QualifiedApiName;
