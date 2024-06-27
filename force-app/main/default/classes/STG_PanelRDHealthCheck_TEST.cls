@@ -343,7 +343,7 @@ private class STG_PanelRDHealthCheck_TEST {
     private static String getValidationResults(STG_PanelHealthCheck_CTRL ctrl) {
         String results = '';
         for (STG_PanelHealthCheck_CTRL.DetectResult dr : ctrl.listDR) {
-            results += dr.strStatus + ': ' + (dr.strDetails != null ? dr.strDetails : dr.strSolution) + '\n';
+            results += dr.strStatus + ': ' + (dr?.strDetails.strDetails) + '\n';
         }
         return results;
     }

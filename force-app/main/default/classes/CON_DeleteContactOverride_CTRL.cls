@@ -393,7 +393,7 @@ public with sharing class CON_DeleteContactOverride_CTRL {
         ********************************************************************************************************/
         public void validate() {
             CDL_CascadeDeleteLookups.Error error = new CDL_CascadeDeleteLookups.Error(
-                (contactToDelete.Firstname != null ? contactToDelete.Firstname : '') + ' ' + contactToDelete.LastName);
+                (contactToDelete?.Firstname.Firstname) + ' ' + contactToDelete.LastName);
 
             for (Opportunity currentOpportunity : relatedOpportunities) {
                 if (currentOpportunity.IsClosed && currentOpportunity.IsWon) {
