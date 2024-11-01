@@ -79,8 +79,7 @@ public with sharing class ADDR_GoogleGeoAPI_Validator implements ADDR_IValidator
 
         this.checked_addresses = new List<Address__c>();
 
-        String endPoint = settings.Address_Verification_Endpoint__c != null ?
-            settings.Address_Verification_Endpoint__c : getDefaultURL();
+        String endPoint = settings.Address_Verification_Endpoint__c ?? getDefaultURL();
 
         if (!addresses.isEmpty()){
             for (Address__c a : addresses) {

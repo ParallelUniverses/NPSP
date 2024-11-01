@@ -992,7 +992,7 @@ public with sharing class fflib_MatcherDefinitions
 		private Boolean matchInOrder {
 			get 
 			{
-				return matchInOrder == null ? false : matchInOrder;
+				return matchInOrder ?? false;
 			}
 			set;
 		}

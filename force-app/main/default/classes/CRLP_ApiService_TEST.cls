@@ -564,7 +564,7 @@ public class CRLP_ApiService_TEST {
         public Object call(String action, Map<String, Object> params) {
             providedParams = params;
             actionCalled = action;
-            return returnValue == null ? new Map<Id, String>() : returnValue;
+            return returnValue ?? new Map<Id, String>();
         }
     }
 

@@ -149,7 +149,7 @@ public with sharing class BDI_ObjectWrapper {
             if (isAnObjectMappingImportField) {
                 Object valueFromDynamicSource = dynamicSource.sourceObj.get(sourceFieldAPIName);
                 Object valueFromDataImport = dataImport.get(sourceFieldAPIName);
-                value = valueFromDynamicSource != null ? valueFromDynamicSource : valueFromDataImport;
+                value = valueFromDynamicSource ?? valueFromDataImport;
             } else {
                 value = dynamicSource.sourceObj.get(sourceFieldAPIName);
             }

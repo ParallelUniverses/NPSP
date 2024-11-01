@@ -442,7 +442,7 @@ public inherited sharing class OPP_OpportunityNaming implements OPP_INaming {
                 // eat potential leading space
                 result = result.replace(' ' + strField, '');
             }
-            result = result.replace(strField, val == null ? '' : val);
+            result = result.replace(strField, val ?? '');
         }
         return result;
     }

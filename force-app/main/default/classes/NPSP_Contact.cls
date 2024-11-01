@@ -186,7 +186,7 @@ public inherited sharing class NPSP_Contact {
     }
 
     public IAddress mailingAddress() {
-        return mailingAddress != null ? mailingAddress : new NPSP_Address(contact);
+        return mailingAddress ?? new NPSP_Address(contact);
     }
 
     public Boolean mailingAddressIsDifferentFrom(IAddress other) {

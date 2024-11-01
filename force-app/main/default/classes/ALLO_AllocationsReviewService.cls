@@ -197,7 +197,7 @@ public inherited sharing class ALLO_AllocationsReviewService {
                 if (allocPositiveAmount != positiveAmount) { // Error condition, must be at least logged
                     return true;
                 }
-                sumAllocAmount += (allocAmount != null) ? allocAmount : 0;
+                sumAllocAmount += allocAmount ?? 0;
             }
             if (ALLO_AllocationsSettings.getSettings().isDefaultAllocationsEnabled()) {
                 if (sumAllocAmount != amount) {

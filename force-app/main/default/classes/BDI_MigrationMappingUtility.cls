@@ -861,7 +861,7 @@ public without sharing class BDI_MigrationMappingUtility {
                 }
 
                 fieldValues = new Map<String, Object>{
-                    'Data_Import_Field_Mapping_Set__c' => dataImportFieldMappingSetRecordName == null ? 'Default_Field_Mapping_Set' : dataImportFieldMappingSetRecordName,
+                    'Data_Import_Field_Mapping_Set__c' => dataImportFieldMappingSetRecordName ?? 'Default_Field_Mapping_Set',
                     'Required__c' => isRequired,
                     'Source_Field_API_Name__c' => sourceFieldAPIName,
                     'Target_Field_API_Name__c' => targetFieldAPIName,

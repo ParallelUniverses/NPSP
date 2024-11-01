@@ -162,7 +162,7 @@ public class UTIL_OrgTelemetry_SObject_BATCH implements Database.Batchable<SObje
 
         return String.format(
             soqlQuery,
-            new List<String>{ idToOffset == null ? '' : idToOffset, String.valueOf(queryLimit) }
+            new List<String>{ idToOffset ?? '', String.valueOf(queryLimit) }
         );
 
     }

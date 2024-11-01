@@ -140,7 +140,7 @@ public inherited sharing class ALLO_AllocationsService {
      * @return Class Instance
      */
     public ALLO_AllocationsService withAlternateRecordErrorsLogger(ERR_RecordError altRecErrs) {
-        this.recErrs = (altRecErrs != null) ? altRecErrs : this.recErrs;
+        this.recErrs = altRecErrs ?? this.recErrs;
         return this;
     }
 

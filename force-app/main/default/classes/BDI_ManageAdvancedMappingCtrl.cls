@@ -267,7 +267,7 @@ public class BDI_ManageAdvancedMappingCtrl {
             //Add possible invalid field mappings
             fieldMappings.addAll(objectMapping.Field_Mappings);
         }
-        return fieldMappings == null ? new BDI_FieldMapping[]{} : fieldMappings;
+        return fieldMappings ?? new BDI_FieldMapping[]{};
     }
 
     /*******************************************************************************************************

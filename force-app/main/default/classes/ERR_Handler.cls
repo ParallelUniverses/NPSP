@@ -498,17 +498,17 @@ public class ERR_Handler {
 
         if (result instanceof Database.SaveResult) {
             Database.SaveResult saveResult = (Database.SaveResult) result;
-            recordId = (saveResult.getId() != null) ? saveResult.getId() : objId;
+            recordId = saveResult.getId() ?? objId;
             error.Error_Type__c = getStatusCode(saveResult.getErrors()[0].getStatusCode());
             error.Full_Message__c = saveResult.getErrors()[0].getMessage();
         } else if (result instanceof Database.DeleteResult) {
             Database.DeleteResult deleteResult = (Database.DeleteResult) result;
-            recordId = (deleteResult.getId() != null) ? deleteResult.getId() : objId;
+            recordId = deleteResult.getId() ?? objId;
             error.Error_Type__c = getStatusCode(deleteResult.getErrors()[0].getStatusCode());
             error.Full_Message__c = deleteResult.getErrors()[0].getMessage();
         } else if (result instanceof Database.UndeleteResult) {
             Database.UndeleteResult undeleteResult = (Database.UndeleteResult) result;
-            recordId = (undeleteResult.getId() != null) ? undeleteResult.getId() : objId;
+            recordId = undeleteResult.getId() ?? objId;
             error.Error_Type__c = getStatusCode(undeleteResult.getErrors()[0].getStatusCode());
             error.Full_Message__c = undeleteResult.getErrors()[0].getMessage();
         }
@@ -563,7 +563,7 @@ public class ERR_Handler {
     * @return The URL of the record. Warning: it may not necessarily be valid.
     */
     public static String getRecordURL(Id saveResultId, Id objId) {
-        Id recordId = (saveResultId != null) ? saveResultId : objId;
+        Id recordId = saveResultId ?? objId;
 
         return getRecordURL(recordId);
     }

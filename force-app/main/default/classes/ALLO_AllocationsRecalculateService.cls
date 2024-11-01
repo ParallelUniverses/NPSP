@@ -175,7 +175,7 @@ public inherited sharing class ALLO_AllocationsRecalculateService {
         
 
         // Convert Amount to 0.  Will only get here with null amount if Parent is a Payment
-        amount = (amount != null) ? amount : 0;
+        amount = amount ?? 0;
         List<Allocation__c> proposedAllocations = new List<Allocation__c>();
 
         if (sourceAllocations != null && sourceAllocations.size() > 0) {
@@ -229,14 +229,14 @@ public inherited sharing class ALLO_AllocationsRecalculateService {
                 // convertToPercentages must be true, the Percentage null, sourceAmount cannot be null and either Default Allocations are not enabled or the allocation is not for the Default Allocation
                 if (convertToPercentages && allocation.Percent__c == null && sourceAmount != null) {
                     // Determine Percentage
-                    Decimal allocationPercent = ((allocation.Amount__c != null) ? allocation.Amount__c : 0) / sourceAmount * 100;
+                    Decimal allocationPercent = (allocation.Amount__c ?? 0) / sourceAmount * 100;
 
                     allocation.Amount__c = (amount * allocationPercent * .01).setScale(2);
 
                     // Store Percentage as is, so precision is not lost in future calculations
                     allocation.Percent__c = allocationPercent;
                 }
-                remainder -= (allocation.Amount__c != null) ? allocation.Amount__c : 0;
+                remainder -= allocation.Amount__c ?? 0;
             }
             Boolean isRemainderAndAmountOppositeSign = (amount >= 0 && remainder < 0) || (amount < 0 && remainder > 0);
             Boolean isRemainderAndAmountSameSign = (amount >= 0 && remainder > 0) || (amount < 0 && remainder < 0);
@@ -250,7 +250,7 @@ public inherited sharing class ALLO_AllocationsRecalculateService {
                 for (Allocation__c allocation : listAlloForInsert) {
                     if (allocation.Percent__c != null) {
                         allocationsWrapper.allocationsForInsert.add(allocation);
-                        remainder -= (allocation.Amount__c != null) ? allocation.Amount__c : 0;
+                        remainder -= allocation.Amount__c ?? 0;
                     }
                 }
 
@@ -342,8 +342,8 @@ public inherited sharing class ALLO_AllocationsRecalculateService {
                         proposedAllocations.add(allocation);
                     }
                 }
-                sumOfAllocations += (curAllocAmount != null) ? curAllocAmount : 0;
-                totalOfPercentages += (allocation.Percent__c != null) ? allocation.Percent__c : 0;
+                sumOfAllocations += curAllocAmount ?? 0;
+                totalOfPercentages += allocation.Percent__c ?? 0;
             }
         }
 
@@ -438,7 +438,7 @@ public inherited sharing class ALLO_AllocationsRecalculateService {
                     allocationsWrapper.addError(ALLO_AllocationsUtil.getOpportunityIdFor(parentObj), assembleAllocationError(parentObj, allocation, Label.alloNegativePercent));
                     errorsFound = true;
                 }
-                totalOfPercentages += (allocation.Percent__c != null) ? allocation.Percent__c : 0;
+                totalOfPercentages += allocation.Percent__c ?? 0;
                 if (allocation.Amount__c != 0) {
                     allocation.Amount__c = 0;
                     proposedAllocations.add (allocation);

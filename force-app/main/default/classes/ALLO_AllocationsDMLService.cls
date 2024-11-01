@@ -122,7 +122,7 @@ public inherited sharing class ALLO_AllocationsDMLService {
      * @return Class Instance
      */
     public ALLO_AllocationsDMLService withAlternateRecordErrorsLogger(ERR_RecordError altRecErrs) {
-        this.recErrs = (altRecErrs != null) ? altRecErrs : this.recErrs;
+        this.recErrs = altRecErrs ?? this.recErrs;
         return this;
     }
 
@@ -251,7 +251,7 @@ public inherited sharing class ALLO_AllocationsDMLService {
         for (Integer i=0; i < deletes.size(); i++) {
             Allocation__c deletedAlloc = allocationsWrapper.allocationsForDelete[i];
             Database.DeleteResult delResult = deletes[i];
-            Id parentRecordId = (deletedAlloc.Opportunity__c != null) ? deletedAlloc.Opportunity__c : deletedAlloc.Payment__c;
+            Id parentRecordId = deletedAlloc.Opportunity__c ?? deletedAlloc.Payment__c;
             allRecordIdsWithDML.add(parentRecordId);
 
             if (delResult.isSuccess()) {
@@ -288,7 +288,7 @@ public inherited sharing class ALLO_AllocationsDMLService {
         for (Integer i=0; i < inserts.size(); i++) {
             Allocation__c insertedAlloc = allocationsWrapper.allocationsForInsert[i];
             Database.SaveResult insResult = inserts[i];
-            Id parentRecordId = (insertedAlloc.Opportunity__c != null) ? insertedAlloc.Opportunity__c : insertedAlloc.Payment__c;
+            Id parentRecordId = insertedAlloc.Opportunity__c ?? insertedAlloc.Payment__c;
             allRecordIdsWithDML.add(parentRecordId);
             if (insResult.isSuccess()) {
                 // add the successfully inserted Allocation to the Opportunity Allocations List, indexed by the Opportunity Id
@@ -324,7 +324,7 @@ public inherited sharing class ALLO_AllocationsDMLService {
         for (Integer i=0; i < updates.size(); i++) {
             Allocation__c updatedAlloc = allocationsWrapper.allocationsForUpdate[i];
             Database.SaveResult updResult = updates[i];
-            Id parentRecordId = (updatedAlloc.Opportunity__c != null) ? updatedAlloc.Opportunity__c : updatedAlloc.Payment__c;
+            Id parentRecordId = updatedAlloc.Opportunity__c ?? updatedAlloc.Payment__c;
             allRecordIdsWithDML.add(parentRecordId);
 
             if (updResult.isSuccess()) {
@@ -348,7 +348,7 @@ public inherited sharing class ALLO_AllocationsDMLService {
      * @param dmlResult associated with the Allocation that errored
      */
     private void handleError(Id parentRecordId, Allocation__c alloc, Object dmlResult) {
-        Id opportunityId = (alloc.Opportunity__c != null) ? alloc.Opportunity__c : allocationsWrapper.paymentIdsToOppIds.get(alloc.Payment__c);
+        Id opportunityId = alloc.Opportunity__c ?? allocationsWrapper.paymentIdsToOppIds.get(alloc.Payment__c);
         SObject parentSObjectType = (alloc.Opportunity__c != null) ? opportunitySObjectType : paymentSObjectType;
 
         getErrorLogger().addError(parentRecordId, dmlResult, parentSObjectType);
@@ -394,7 +394,7 @@ public inherited sharing class ALLO_AllocationsDMLService {
         Integer idx = 0;
         while (idx < allocs.size()) {
             Allocation__c alloc = allocs[idx];
-            Id allocParentRecordId = (alloc.Opportunity__c != null) ? alloc.Opportunity__c : alloc.Payment__c;
+            Id allocParentRecordId = alloc.Opportunity__c ?? alloc.Payment__c;
 
             if (allocParentRecordId != null && this.recordIdsWithErrors.contains(allocParentRecordId)) {
                 // If it is in the errors set, remove it

@@ -65,9 +65,7 @@ public with sharing class CON_DeleteContactOverride_CTRL {
     @TestVisible
     private Boolean lexOrSF1User {
         get {
-            return lexOrSF1User = lexOrSF1User == null
-                ? UserInfo.getUiThemeDisplayed().contains('Theme4')
-                : lexOrSF1User;
+            return lexOrSF1User = lexOrSF1User ?? UserInfo.getUiThemeDisplayed().contains('Theme4');
         }
         set;
     }
@@ -393,7 +391,7 @@ public with sharing class CON_DeleteContactOverride_CTRL {
         ********************************************************************************************************/
         public void validate() {
             CDL_CascadeDeleteLookups.Error error = new CDL_CascadeDeleteLookups.Error(
-                (contactToDelete.Firstname != null ? contactToDelete.Firstname : '') + ' ' + contactToDelete.LastName);
+                (contactToDelete.Firstname ?? '') + ' ' + contactToDelete.LastName);
 
             for (Opportunity currentOpportunity : relatedOpportunities) {
                 if (currentOpportunity.IsClosed && currentOpportunity.IsWon) {

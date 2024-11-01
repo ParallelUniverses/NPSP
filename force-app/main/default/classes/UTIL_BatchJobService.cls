@@ -377,7 +377,7 @@ public without sharing class UTIL_BatchJobService {
         */
         @TestVisible
         private String calcTimeElapsed(DateTime startDate, DateTime endDate) {
-            endDate = endDate == null ? Datetime.now() : endDate;
+            endDate = endDate ?? Datetime.now();
 
             Long milliseconds = endDate.getTime() - startDate.getTime();
             Long days = milliseconds / 1000 /60 /60 /24;

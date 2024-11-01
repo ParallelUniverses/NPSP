@@ -390,7 +390,7 @@ public inherited sharing class ALLO_AllocationsWrapper {
      */
     public void addAllocation(Allocation__c alloc) {
         // Determine Parent Id, and which Map to use
-        Id parentId = (alloc.Opportunity__c != null) ? alloc.Opportunity__c : alloc.Payment__c;
+        Id parentId = alloc.Opportunity__c ?? alloc.Payment__c;
         Map<Id, List<Allocation__c>> allocsByParentId = (alloc.Opportunity__c != null) ? oppsAllocations : paymentAllocations;
 
         if (allocsByParentId.containsKey(parentId)) {
@@ -408,7 +408,7 @@ public inherited sharing class ALLO_AllocationsWrapper {
      */
     public void removeAllocation(Allocation__c alloc) {
         // Determine Parent Id, and which Map to use
-        Id parentId = (alloc.Opportunity__c != null) ? alloc.Opportunity__c : alloc.Payment__c;
+        Id parentId = alloc.Opportunity__c ?? alloc.Payment__c;
         Map<Id, List<Allocation__c>> allocsByParentId = (alloc.Opportunity__c != null) ? oppsAllocations : paymentAllocations;
 
         if (allocsByParentId.containsKey(parentId)) {
@@ -440,7 +440,7 @@ public inherited sharing class ALLO_AllocationsWrapper {
             return;
 
         // Determine Parent Id, and which Map to use
-        Id parentId = (alloc.Opportunity__c != null) ? alloc.Opportunity__c : alloc.Payment__c;
+        Id parentId = alloc.Opportunity__c ?? alloc.Payment__c;
         Map<Id, List<Allocation__c>> allocsByParentId = (alloc.Opportunity__c != null) ? oppsAllocations : paymentAllocations;
 
         if (allocsByParentId.containsKey(parentId)) {

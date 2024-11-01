@@ -105,9 +105,7 @@ public with sharing class BGE_DataImportBatchEntry_CTRL {
         Decimal totalAmount = 0;
 
         for (DataImportRow dataImportRow: dataImportRows) {
-                totalAmount+= dataImportRow.record.Donation_Amount__c == null
-                    ? 0
-                    : dataImportRow.record.Donation_Amount__c;
+                totalAmount+= dataImportRow.record.Donation_Amount__c ?? 0;
         }
         return totalAmount;
     }
@@ -120,9 +118,7 @@ public with sharing class BGE_DataImportBatchEntry_CTRL {
             FROM DataImport__c
             WHERE NPSP_Data_Import_Batch__c =: batchId
         ]) {
-            totalAmount+= dataImport.Donation_Amount__c == null
-                ? 0
-                : dataImport.Donation_Amount__c;
+            totalAmount+= dataImport.Donation_Amount__c ?? 0;
         }
         return totalAmount;
     }

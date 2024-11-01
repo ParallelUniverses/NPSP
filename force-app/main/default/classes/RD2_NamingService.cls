@@ -300,7 +300,7 @@ public inherited sharing class RD2_NamingService {
                 String token = '{!' + fld + '}';
                 while (rdName.containsIgnoreCase(token)) {
                     String val = fieldReplacements.get(fld);
-                    rdName = rdName.replace(token, (val != null ? val : ''));
+                    rdName = rdName.replace(token, (val ?? ''));
                 }
             }
         }

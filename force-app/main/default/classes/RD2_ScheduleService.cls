@@ -98,7 +98,7 @@ public without sharing class RD2_ScheduleService {
         schedule.InstallmentFrequency__c = rd.InstallmentFrequency__c;
         schedule.InstallmentPeriod__c = rd.npe03__Installment_Period__c;
         schedule.PaymentMethod__c = rd.PaymentMethod__c;
-        schedule.StartDate__c = (rd.StartDate__c != null ? rd.StartDate__c : rd.npe03__Date_Established__c);
+        schedule.StartDate__c = (rd.StartDate__c ?? rd.npe03__Date_Established__c);
 
         if (isFirstAndFifteenth(rd)) {
             schedule.DayOfMonth__c = RD2_Constants.DAY_OF_MONTH_FIRST;
@@ -315,11 +315,9 @@ public without sharing class RD2_ScheduleService {
             return installments;
         }
 
-        numInstallments = numInstallments == null
-            ? DEFAULT_INSTALLMENT_NUMBER
-            : numInstallments;
+        numInstallments = numInstallments ?? DEFAULT_INSTALLMENT_NUMBER;
 
-        Date referenceDate = startDate == null ? currentDate : startDate;
+        Date referenceDate = startDate ?? currentDate;
         while (installments.size() < numInstallments) {
             Installment inst = getNextInstallment(referenceDate, schedules);
 
@@ -346,7 +344,7 @@ public without sharing class RD2_ScheduleService {
     */
     public List<Installment> getVisualizedInstallments(Date startDate, Date endDate, List<RecurringDonationSchedule__c> schedules) {
         List<Installment> installments = new List<Installment>();
-        startDate = startDate == null ? currentDate : startDate;
+        startDate = startDate ?? currentDate;
 
         if (schedules == null || startDate > endDate) {
             return installments;
@@ -1016,7 +1014,7 @@ public without sharing class RD2_ScheduleService {
             campaignId = rdSchedule.Campaign__c;
             campaignName = rdSchedule.Campaign__r.Name;
             dayOfMonth = rdSchedule.InstallmentPeriod__c == RD2_Constants.INSTALLMENT_PERIOD_MONTHLY ? rdSchedule.DayOfMonth__c : null;
-            endDate = (rdSchedule.EndDate__c != null) ? rdSchedule.EndDate__c : rd.EndDate__c;
+            endDate = rdSchedule.EndDate__c ?? rd.EndDate__c;
             installmentAmount = rdSchedule.InstallmentAmount__c;
             installmentFrequency = rdSchedule.InstallmentFrequency__c != null ? Integer.valueOf(rdSchedule.InstallmentFrequency__c) : null;
             installmentPeriod = rdSchedule.InstallmentPeriod__c;

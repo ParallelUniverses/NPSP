@@ -86,7 +86,7 @@ public with sharing class MTCH_FindGifts_CTRL {
 
         oppQuery +=  ' FROM Opportunity WHERE Id = :oppId';
         opp = Database.query(oppQuery);
-        matchingGiftPercent = opp.Account.Matching_Gift_Percent__c == null ? 100 : opp.Account.Matching_Gift_Percent__c;
+        matchingGiftPercent = opp.Account.Matching_Gift_Percent__c ?? 100;
 
         // if the opp Amount is null, treat as $0 and still load the page.
         if (opp.Amount == null) {

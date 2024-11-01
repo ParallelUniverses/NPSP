@@ -1250,7 +1250,7 @@ public class ALLO_Allocations_TDTM extends TDTM_Runnable {
     * @return Decimal value to return
     ********************************************************************************************************/
     @testVisible private static Decimal valueOrDefaultIfNull(Decimal val, Decimal defaultVal) {
-        return (val != null) ? val : defaultVal;
+        return val ?? defaultVal;
     }
 
     /**

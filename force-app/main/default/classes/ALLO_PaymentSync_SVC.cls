@@ -92,7 +92,7 @@ public class ALLO_PaymentSync_SVC {
     ********************************************************************************************************/
     private void addAllocationAmountToPayment(Id paymentId, Decimal allocAmount) {
         Decimal amt = allocatedAmountByPayment.containsKey(paymentId) ? allocatedAmountByPayment.get(paymentId) : 0;
-        amt += ((allocAmount != null) ? allocAmount : 0);
+        amt += (allocAmount ?? 0);
         allocatedAmountByPayment.put (paymentId, amt);
     }
 
@@ -103,7 +103,7 @@ public class ALLO_PaymentSync_SVC {
     ********************************************************************************************************/
     private void removeAllocationAmountFromPayment(Id paymentId, Decimal allocAmount) {
         Decimal amt = allocatedAmountByPayment.containsKey(paymentId) ? allocatedAmountByPayment.get(paymentId) : 0;
-        amt -= ((allocAmount != null) ? allocAmount : 0);
+        amt -= (allocAmount ?? 0);
         allocatedAmountByPayment.put (paymentId, amt);
     }
 
@@ -126,7 +126,7 @@ public class ALLO_PaymentSync_SVC {
             Map<Id, Allocation__c> allocationsByGAUId = null;
 
             // Determine if parent of Allocation is Opportunity or Payment
-            Id parentId = (allocation.Opportunity__c != null) ? allocation.Opportunity__c : allocation.Payment__c;
+            Id parentId = allocation.Opportunity__c ?? allocation.Payment__c;
 
             if (parentId != null) {
                 allocationsByGAUID = (triggerAllocationsByGAUByParentId.containsKey(parentId)) ? triggerAllocationsByGAUByParentId.get(parentId) : new Map<Id, Allocation__c>();
@@ -149,7 +149,7 @@ public class ALLO_PaymentSync_SVC {
             Map<Id, Allocation__c> allocationsByGAUId = null;
 
             // Determine if parent of Allocation is Opportunity or Payment
-            Id parentId = (allocation.Opportunity__c != null) ? allocation.Opportunity__c : allocation.Payment__c;
+            Id parentId = allocation.Opportunity__c ?? allocation.Payment__c;
 
             if (parentId != null) {
                 allocationsByGAUID = (oldTriggerAllocationsByGAUByParentIdForValidation.containsKey(parentId)) ? oldTriggerAllocationsByGAUByParentIdForValidation.get(parentId) : new Map<Id, Allocation__c>();
@@ -660,7 +660,7 @@ public class ALLO_PaymentSync_SVC {
 
         for (npe01__OppPayment__c payment : context.payments.values()) {
             Decimal allocAmt = (allocatedAmountByPayment.containsKey(payment.Id)) ? allocatedAmountByPayment.get(payment.Id) : 0;
-            Decimal paymentAmt = (payment.npe01__Payment_Amount__c != null) ? payment.npe01__Payment_Amount__c : 0;
+            Decimal paymentAmt = payment.npe01__Payment_Amount__c ?? 0;
             Decimal remainder = paymentAmt - allocAmt;
             List<Allocation__c> defaultAllocs = defaultAllocsByPayment.get(payment.Id);
             Allocation__c defaultAlloc = null;

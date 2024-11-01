@@ -280,7 +280,7 @@ public with sharing class ADDR_SmartyStreets_Gateway {
         */
         public String getFullAddress() {
             return (((addressee != null) ? (addressee + '\n') : '') + ((delivery_line_1 != null) ? (delivery_line_1 + '\n') : '') +
-                ((delivery_line_2 != null) ? (delivery_line_2 + '\n') : '') + ((last_line != null) ? (last_line) : '')).trim();
+                ((delivery_line_2 != null) ? (delivery_line_2 + '\n') : '') + (last_line ?? '')).trim();
         }
     }
 

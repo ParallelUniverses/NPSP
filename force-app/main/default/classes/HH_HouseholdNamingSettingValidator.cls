@@ -40,9 +40,7 @@ public with sharing class HH_HouseholdNamingSettingValidator {
     */
     private static Contact[] exampleContacts {
         get {
-            return exampleContacts = exampleContacts == null
-                ? buildExampleContacts()
-                : exampleContacts;
+            return exampleContacts = exampleContacts ?? buildExampleContacts();
         }
         set;
     }

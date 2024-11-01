@@ -60,7 +60,7 @@ public without sharing class RD2_OpportunityEvaluation_BATCH
             if (closedFilterEnabled == null) {
                 closedFilterEnabled = UTIL_CustomSettingsFacade.getRecurringDonationsSettings().ExcludeClosedRecurringDonations__c;
             }
-            return closedFilterEnabled != null ? closedFilterEnabled : false;
+            return closedFilterEnabled ?? false;
         }
         set;
     }
