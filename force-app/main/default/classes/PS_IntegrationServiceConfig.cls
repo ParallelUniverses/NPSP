@@ -258,9 +258,7 @@ public with sharing class PS_IntegrationServiceConfig {
          * @return clientId || productId
          */
         public String getClientId() {
-            return config.get(CLIENTID) == null
-                ? config.get(PRODUCTID)
-                :  config.get(CLIENTID);
+            return config.get(CLIENTID) ?? config.get(PRODUCTID);
         }
 
         public String getGatewayIds() {

@@ -493,7 +493,7 @@ public with sharing class PSC_ManageSoftCredits_CTRL {
         Double total = 0;
         for (SoftCredit sc : softCredits) {
             if (sc.contactRole.ContactId != null) {
-                total += sc.partial.Amount__c != null ? sc.partial.Amount__c : 0;
+                total += sc.partial.Amount__c ?? 0;
             }
         }
         return isAmount ? total : (total/100) * opp.Amount;

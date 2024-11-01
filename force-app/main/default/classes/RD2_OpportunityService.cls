@@ -422,9 +422,7 @@ public with sharing class RD2_OpportunityService {
         Boolean isChanged = false;
 
         if (opp.AccountId != rd.npe03__Organization__c) {
-            opp.AccountId = rd.npe03__Organization__c == null
-                ? rd.npe03__Contact__c != null ? rd.npe03__Contact__r.AccountId : null
-                : rd.npe03__Organization__c;
+            opp.AccountId = rd.npe03__Organization__c ?? (rd.npe03__Contact__c != null ? rd.npe03__Contact__r.AccountId : null);
 
             isChanged = true;
         }

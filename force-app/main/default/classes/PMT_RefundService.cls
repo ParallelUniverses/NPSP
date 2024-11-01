@@ -372,7 +372,7 @@ public inherited sharing class PMT_RefundService {
 
         for (Integer i = 0; i < this.refundRecords.size(); i++) {
             Opportunity parentOpp = this.opportunityMap.get(this.refundRecords[i].npe01__Opportunity__c);
-            parentOpp.Amount = (parentOpp.Amount == null) ? 0 : parentOpp.Amount;
+            parentOpp.Amount = parentOpp.Amount ?? 0;
             parentOpp.Amount += getAdjustedRefundAmount(i);
         }
 

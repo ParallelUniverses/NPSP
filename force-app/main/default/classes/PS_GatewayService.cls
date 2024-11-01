@@ -128,7 +128,7 @@ public with sharing class PS_GatewayService {
         public GatewayTemplateSetting() {}
         public GatewayTemplateSetting(ResponseBody rb) {
             this.id = rb.id;
-            this.gatewayName = rb.alias == null ? rb.vendorName : rb.alias;
+            this.gatewayName = rb.alias ?? rb.vendorName;
             this.isDefault = false;
             this.isCreditCardEnabled = false;
             this.isACHEnabled = false;

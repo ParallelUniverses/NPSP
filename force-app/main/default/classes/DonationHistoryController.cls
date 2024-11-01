@@ -94,7 +94,7 @@ public with sharing class DonationHistoryController {
     */
     @AuraEnabled(cacheable=true)
     public static DonationHistoryAppView getDonationHistory(Id contactId, Integer offset, String filter) {
-        contactId = (contactId == null ? getContactIdByUserId() : contactId );
+        contactId = (contactId ?? getContactIdByUserId() );
         DonationHistoryService service = new DonationHistoryService();
         try {
             Boolean paymentsEnabled = historyService.checkIfPaymentsAreEnabled();
@@ -119,7 +119,7 @@ public with sharing class DonationHistoryController {
     @AuraEnabled(cacheable=true)
     public static List<String> getYearsWithDonations(Id contactId) {
         try {
-            contactId = (contactId == null ? getContactIdByUserId() : contactId );
+            contactId = (contactId ?? getContactIdByUserId() );
             return historyService.getYearsWithDonationsForContact(contactId);
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

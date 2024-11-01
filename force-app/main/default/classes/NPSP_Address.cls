@@ -174,10 +174,10 @@ public inherited sharing class NPSP_Address implements IAddress {
                         strCleanup(address.MailingPostalCode__c) +
                         strCleanup(address.MailingCountry__c) +
                         strCleanup(address.Address_Type__c) +
-                        (address.Seasonal_Start_Day__c != null ? address.Seasonal_Start_Day__c : '') +
-                        (address.Seasonal_Start_Month__c != null ? address.Seasonal_Start_Month__c : '') +
-                        (address.Seasonal_End_Day__c != null ? address.Seasonal_End_Day__c : '') +
-                        (address.Seasonal_End_Month__c != null ? address.Seasonal_End_Month__c : '');
+                        (address.Seasonal_Start_Day__c ?? '') +
+                        (address.Seasonal_Start_Month__c ?? '') +
+                        (address.Seasonal_End_Day__c ?? '') +
+                        (address.Seasonal_End_Month__c ?? '');
         return strKey;
     }
 

@@ -104,9 +104,9 @@ public with sharing class BDI_DataImport_TEST {
                 Contact2_Firstname__c = firstname2,
                 Contact2_Lastname__c = lastname2,
                 Contact2_Personal_Email__c = (lastname2 == null ? null : firstname2 + '@' + lastname2 + '.com'),
-                Home_City__c = (address.MailingCity__c == null ? null : address.MailingCity__c),
-                Home_State_Province__c = (address.MailingState__c == null ? null : address.MailingState__c),
-                Home_Country__c = (address.MailingCountry__c == null ? null : address.MailingCountry__c)
+                Home_City__c = (address.MailingCity__c ?? null),
+                Home_State_Province__c = (address.MailingState__c ?? null),
+                Home_Country__c = (address.MailingCountry__c ?? null)
         );
     }
 

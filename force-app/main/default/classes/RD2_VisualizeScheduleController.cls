@@ -560,7 +560,7 @@ public with sharing class RD2_VisualizeScheduleController {
          */
         @AuraEnabled
         public List<Object> getRecords() {
-            return this.records == null ? new List<Object>() : this.records;
+            return this.records ?? new List<Object>();
         }
     }
 

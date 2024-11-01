@@ -48,7 +48,7 @@ public with sharing class ALLO_ManageAllocations_CTRL {
      * for the current allocations.
      */
     public Boolean hasAccess {
-        get { return hasAccess == null ? false : hasAccess; }
+        get { return hasAccess ?? false; }
         set;
     }
 

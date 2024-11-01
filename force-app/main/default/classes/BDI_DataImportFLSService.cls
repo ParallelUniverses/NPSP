@@ -100,9 +100,7 @@ public class BDI_DataImportFLSService {
                 }
 
                 String fieldName =
-                        relationshipFieldName != null ?
-                                relationshipFieldName :
-                                dataImportFieldName;
+                        relationshipFieldName ?? dataImportFieldName;
 
                 SObjectField sourceSObjectField =
                         UTIL_Describe.getFieldDescribe(

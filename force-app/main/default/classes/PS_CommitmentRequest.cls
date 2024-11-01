@@ -435,9 +435,7 @@ public inherited sharing class PS_CommitmentRequest {
     private Integer getCurrencyMultiplier(String currencyCode) {
         Integer currencyMultiplier = currencyMultiplierByIsoCode.get(currencyCode);
 
-        return currencyMultiplier == null
-            ? DEFAULT_CURRENCY_MULTIPLIER
-            : currencyMultiplier;
+        return currencyMultiplier ?? DEFAULT_CURRENCY_MULTIPLIER;
     }
 
     /***

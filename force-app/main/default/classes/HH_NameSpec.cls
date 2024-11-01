@@ -369,7 +369,7 @@ public with sharing class HH_NameSpec implements HH_INaming {
                 // eat potential leading space
                 str = str.replace(' ' + strField, '');
             }
-            str = str.replace(strField, val == null ? '' : val);
+            str = str.replace(strField, val ?? '');
         }
         return str;
     }

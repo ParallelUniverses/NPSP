@@ -435,21 +435,21 @@ public class CMT_FilterRule {
                 return fieldValue != compareValue;
 
             } else if (rule.operation == FilterOperation.STARTS_WITH) {
-                compareValue = (compareValue == null ? '' : compareValue);
+                compareValue = (compareValue ?? '');
                 return fieldValue.startsWithIgnoreCase(compareValue);
 
             } else if (rule.operation == FilterOperation.CONTAINS) {
-                compareValue = (compareValue == null ? '' : compareValue);
+                compareValue = (compareValue ?? '');
                 return fieldValue.containsIgnoreCase(compareValue);
 
             } else if (rule.operation == FilterOperation.DOES_NOT_CONTAIN) {
-                compareValue = (compareValue == null ? '' : compareValue);
+                compareValue = (compareValue ?? '');
                 return !fieldValue.containsIgnoreCase(compareValue);
 
             } else if (rule.operation == FilterOperation.IS_INCLUDED || rule.operation == FilterOperation.IS_NOT_INCLUDED) {
                 // Included only works with Multi-Select picklist fields
                 // It checks to see if the entered value(s) are in the list of picklist values in the field
-                compareValue = (compareValue == null ? '' : compareValue);
+                compareValue = (compareValue ?? '');
 
                 List<String> selectedValues = compareValue.split(';');
                 List<String> fieldValues = fieldValue.split(';');
@@ -472,7 +472,7 @@ public class CMT_FilterRule {
             } else if (rule.operation == FilterOperation.IN_LIST || rule.operation == FilterOperation.NOT_IN_LIST) {
                 // IN and NOT-IN only works with standard text and simple picklist fields
                 // It checks to see if the field value is in the liste of entered value(s)
-                compareValue = (compareValue == null ? '' : compareValue);
+                compareValue = (compareValue ?? '');
 
                 List<String> selectedValues = compareValue.split(';');
                 Boolean found = false;

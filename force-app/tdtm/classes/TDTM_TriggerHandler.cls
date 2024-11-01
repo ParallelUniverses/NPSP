@@ -190,11 +190,11 @@ public class TDTM_TriggerHandler {
                     //Also,a future cannot be called from a future or batch method.
                     if (async && !isBefore && !System.isFuture() && !System.isBatch()) {
                         UTIL_Debug.debug(LoggingLevel.WARN, '****Calling asynchronously: ' + classToRunName + ' for ' +
-                                describeObj.getName() + ': ' + thisAction + ' with ' + (newList != null ? newList : oldList).size() + ' records');
+                                describeObj.getName() + ': ' + thisAction + ' with ' + (newList ?? oldList).size() + ' records');
                         runAsync(classToRun, classToRunName, newList, oldList, thisAction, describeObj);
                     } else {
                         UTIL_Debug.debug(LoggingLevel.WARN, '****Calling synchronously: ' + classToRunName + ' for ' +
-                                describeObj.getName() + ': ' + thisAction + ' with ' + (newList != null ? newList : oldList).size() + ' records');
+                                describeObj.getName() + ': ' + thisAction + ' with ' + (newList ?? oldList).size() + ' records');
                         return classToRun.run(newList, oldList, thisAction, describeObj);
                     }
                 } else if (classInstance instanceof TDTM_RunnableMutable) {
@@ -202,7 +202,7 @@ public class TDTM_TriggerHandler {
                     // interface if the class intends to directly modify the global DmlWrappper
                     TDTM_RunnableMutable classToRun = (TDTM_RunnableMutable) classInstance;
                     UTIL_Debug.debugWithInfo('****Calling synchronously: ' + classToRunName + ' for ' +
-                        describeObj.getName() + ': ' + thisAction + ' with ' + (newList != null ? newList : oldList).size() + ' records');
+                        describeObj.getName() + ': ' + thisAction + ' with ' + (newList ?? oldList).size() + ' records');
 
                     // we do not check whether class is identified as Asynchronous__c because the
                     // underlying assumption to mutating DmlWrapper is that the class modifies

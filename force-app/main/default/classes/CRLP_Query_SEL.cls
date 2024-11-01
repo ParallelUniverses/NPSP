@@ -322,7 +322,7 @@ public inherited sharing class CRLP_Query_SEL {
                 String fieldName = rule.Field__r.QualifiedApiName;
                 if (countOfRuleUsage.containsKey(fieldName)) {
                     countOfRuleUsage.put(fieldName, countOfRuleUsage.get(fieldName)+1);
-                    String constantVal = (rule.Constant__c == null ? '' : rule.Constant__c);
+                    String constantVal = (rule.Constant__c ?? '');
 
                     // Next compare the Constant value for each of the rules. If the value is the same across
                     // each of the Rules for this field, the value will is stored in the targetFieldAndConstant map.

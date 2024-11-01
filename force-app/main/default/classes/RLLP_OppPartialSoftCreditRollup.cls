@@ -188,7 +188,7 @@ public class RLLP_OppPartialSoftCreditRollup {
     * @return Contact The updated Contact record
     */ 
     private static Contact countPartialSoftCredits(Contact c, Partial_Soft_Credit__c psc, Date currentYearStart) {
-        decimal amount = psc.Amount__c != null ? psc.Amount__c : 0;
+        decimal amount = psc.Amount__c ?? 0;
         string pscCurrencyIsoCode = RLLP_OppRollup_UTIL.isMultiCurrency() ? (string)psc.get('CurrencyIsoCode') : '';
         return countSoftCreditsSharedLogic(c, amount, pscCurrencyIsoCode, psc.Opportunity__r.CloseDate, currentYearStart);
     }
@@ -201,7 +201,7 @@ public class RLLP_OppPartialSoftCreditRollup {
     * @return Contact The updated Contact record
     */ 
     private static Contact countOpportunityContactRoles(Contact c, OpportunityContactRole ocr, Date currentYearStart) {
-        decimal amount = ocr.Opportunity.Amount != null ? ocr.Opportunity.Amount : 0;
+        decimal amount = ocr.Opportunity.Amount ?? 0;
         string oppCurrencyIsoCode = RLLP_OppRollup_UTIL.isMultiCurrency() ? (string)ocr.Opportunity.get('CurrencyIsoCode') : '';
         return countSoftCreditsSharedLogic(c, amount, oppCurrencyIsoCode, ocr.Opportunity.CloseDate, currentYearStart);
     }       

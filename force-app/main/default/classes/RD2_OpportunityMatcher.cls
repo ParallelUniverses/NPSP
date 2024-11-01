@@ -395,7 +395,7 @@ public inherited sharing class RD2_OpportunityMatcher {
                 ? installment.installmentAmount
                 : (isClosedLost() ? 0 : opp.Amount);
 
-            return amount == null ? 0 : amount;
+            return amount ?? 0;
         }
 
         /***

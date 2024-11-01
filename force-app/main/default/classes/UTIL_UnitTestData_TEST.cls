@@ -816,7 +816,7 @@ public class UTIL_UnitTestData_TEST {
             Username = email,
             Alias = alias,
             TimeZoneSidKey = UserInfo.getTimeZone().toString(),
-            LocaleSidKey = (localSidKey != null ? localSidKey : UserInfo.getLocale()),
+            LocaleSidKey = (localSidKey ?? UserInfo.getLocale()),
             LanguageLocaleKey = UserInfo.getLanguage(),
             EmailEncodingKey = 'ISO-8859-1'
         );

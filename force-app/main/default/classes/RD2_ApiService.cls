@@ -139,7 +139,7 @@ public inherited sharing class RD2_ApiService {
             isPause = rdSchedule.IsPause__c;
             campaignId = rdSchedule.Campaign__c;
             dayOfMonth = rdSchedule.InstallmentPeriod__c == RD2_Constants.INSTALLMENT_PERIOD_MONTHLY ? rdSchedule.DayOfMonth__c : null;
-            endDate = (rdSchedule.EndDate__c != null) ? rdSchedule.EndDate__c : rd.EndDate__c;
+            endDate = rdSchedule.EndDate__c ?? rd.EndDate__c;
             installmentAmount = rdSchedule.InstallmentAmount__c;
             installmentFrequency = rdSchedule.InstallmentFrequency__c != null ? Integer.valueOf(rdSchedule.InstallmentFrequency__c) : null;
             installmentPeriod = rdSchedule.InstallmentPeriod__c;
@@ -422,9 +422,7 @@ public inherited sharing class RD2_ApiService {
 
         public PauseObject populateDefaultValues() {
             this.isSuccess = true;
-            this.unPause = (this.unPause == null)
-                ? false
-                : this.unPause;
+            this.unPause = this.unPause ?? false;
 
             return this;
         }

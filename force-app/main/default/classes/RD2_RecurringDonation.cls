@@ -97,9 +97,7 @@ public inherited sharing class RD2_RecurringDonation {
     public RD2_RecurringDonation(npe03__Recurring_Donation__c rd, List<Opportunity> opportunities) {
         this.rd = rd;
 
-        this.opportunities = opportunities == null 
-            ? new List<Opportunity>()
-            : opportunities;
+        this.opportunities = opportunities ?? new List<Opportunity>();
     }
 
     /**
@@ -469,9 +467,7 @@ public inherited sharing class RD2_RecurringDonation {
     * @return Decimal
     */
     public Decimal getPaidAmount() {
-        return rd.npe03__Paid_Amount__c == null
-            ? 0
-            : rd.npe03__Paid_Amount__c;
+        return rd.npe03__Paid_Amount__c ?? 0;
     }
 
     public RecurringDonationSchedule__c getPauseSchedule() {
@@ -521,7 +517,7 @@ public inherited sharing class RD2_RecurringDonation {
     }
 
     public Date getExpectedDonationDate(RD2_ScheduleService scheduleService) {
-        Date baseDate = (rd.npe03__Last_Payment_Date__c == null) ? rd.StartDate__c : rd.npe03__Last_Payment_Date__c;
+        Date baseDate = rd.npe03__Last_Payment_Date__c ?? rd.StartDate__c;
         return scheduleService.getVisualizedInstallments(
             baseDate.addDays(1),
             1,
@@ -581,9 +577,7 @@ public inherited sharing class RD2_RecurringDonation {
     * @return Boolean
     */
     public Boolean isNew() {
-        return isNew == null
-            ? opportunities.isEmpty()
-            : isNew;
+        return isNew ?? opportunities.isEmpty();
     }
 
     /**
